@@ -8,10 +8,59 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="スタイリング" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="ThemeResource、Style、テンプレートなどを整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="スタイリング" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="ResourceDictionary、StaticResource、ThemeResource、標準スタイルの使い分けを、WPF との違いとあわせて確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="リソースの使い分け" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="190" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ResourceDictionary" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="アプリ全体で共有する色、余白、Style をまとめます。このサンプルでは App.xaml にガイドページ共通のスタイルを置いています。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="StaticResource" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="起動後に値が変わらない前提のリソース参照に使います。独自スタイルや固定的なレイアウト値に向いています。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="ThemeResource" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="ライトテーマ、ダークテーマ、ハイコントラストなどテーマ変化に追従したい色や標準スタイルに使います。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="共通スタイルの例" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="複数ページで同じ余白やカード表現を使う場合、各 Page に同じ値を直接書くより、App.xaml の Style にまとめると変更箇所を減らせます。"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Style=&quot;{StaticResource GuideCardBorderStyle}&quot;&#x0a;Style=&quot;{StaticResource GuideSectionHeadingTextBlockStyle}&quot;"
+                        Style="{StaticResource GuideCodeTextBlockStyle}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WinUI 標準スタイルを活用する" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock
+                    Text="TitleTextBlockStyle などの標準スタイルや、CardBackgroundFillColorDefaultBrush などのテーマブラシを使うと、Windows のテーマに合わせた見た目を保ちやすくなります。固定色を増やす前に、ThemeResource で表現できないかを確認します。"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="WPF と同じように ResourceDictionary で見た目を共有できますが、WinUI 3 ではテーマリソースを前提にした標準コントロールの見た目を優先すると、ライト／ダークテーマで破綻しにくくなります。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

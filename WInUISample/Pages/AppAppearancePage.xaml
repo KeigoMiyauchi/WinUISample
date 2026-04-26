@@ -8,10 +8,60 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="アプリ外観" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="Mica、タイトルバー、テーマなど、アプリ全体の見た目を整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="アプリ外観" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="Mica、タイトルバー、アイコン、manifest 表示名の関係を整理し、WinUI 3 アプリの見た目を調整する入口を確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="外観を決める主な場所" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="190" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="MicaBackdrop" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Window.SystemBackdrop に設定する背景素材です。このサンプルでは MainWindow.xaml で MicaBackdrop を使っています。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="タイトルバー" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Window の Title や AppWindow 関連 API で調整します。独自タイトルバーを作る場合はドラッグ領域やボタン領域も考慮します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="アプリアイコン" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Package.appxmanifest の VisualElements と Assets フォルダーの画像が、スタートメニューやタスクバーで使われます。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="表示名" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Package.appxmanifest の DisplayName が、インストール後のアプリ名として表示されます。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="このサンプルで確認できる設定" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="MainWindow.xaml: Window.SystemBackdrop に MicaBackdrop を指定&#x0a;Package.appxmanifest: DisplayName と VisualElements を指定&#x0a;Assets: ロゴやスプラッシュスクリーン画像を配置"
+                        Style="{StaticResource GuideCodeTextBlockStyle}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WPF との違い" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock
+                    Text="WPF では WindowStyle、AllowsTransparency、独自 Chrome などでウィンドウ外観を大きく作り込むことができます。WinUI 3 では Windows App SDK のウィンドウ API、標準背景素材、manifest の表示名やロゴ資産を組み合わせて整えます。"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="この Issue では外観設定を直接変更するのではなく、どこを変更すればよいかをガイドページ上で分かる状態にしています。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>
