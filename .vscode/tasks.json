@@ -20,9 +20,8 @@
         {
             "label": "MSIXパッケージを登録して起動",
             "type": "shell",
-            "command": "Add-AppxPackage -Register -ForceApplicationShutdown '${workspaceFolder}/WinUISample/bin/x64/Debug/net8.0-windows10.0.19041.0/win-x64/AppX/AppxManifest.xml'; Start-Process 'explorer.exe' 'shell:AppsFolder\\30fb9632-0ca3-4b46-b553-f1c909f0766e_ze6ep6tpmmkp8!App'; Start-Sleep 3",
-            "dependsOn": "ビルド",
-            "problemMatcher": []
+            "command": "dotnet build '${workspaceFolder}/WinUISample/WinUISample.csproj' /p:Platform=x64 /p:Configuration=Debug; if ($LASTEXITCODE -eq 0) { Add-AppxPackage -Register -ForceApplicationShutdown '${workspaceFolder}/WinUISample/bin/x64/Debug/net8.0-windows10.0.19041.0/win-x64/AppX/AppxManifest.xml'; Start-Process 'explorer.exe' 'shell:AppsFolder\\30fb9632-0ca3-4b46-b553-f1c909f0766e_ze6ep6tpmmkp8!App'; Start-Sleep 3 } else { throw 'ビルドに失敗しました' }",
+            "problemMatcher": "$msCompile"
         }
     ]
 }
