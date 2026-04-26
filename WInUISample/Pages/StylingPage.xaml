@@ -7,11 +7,179 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <SolidColorBrush x:Key="StylePreviewNeutralBackgroundBrush" Color="#F8FAFC" />
+        <SolidColorBrush x:Key="StylePreviewNeutralForegroundBrush" Color="#1F2937" />
+        <SolidColorBrush x:Key="StylePreviewAccentBackgroundBrush" Color="#EAF2FF" />
+        <SolidColorBrush x:Key="StylePreviewAccentForegroundBrush" Color="#123B6D" />
+        <SolidColorBrush x:Key="StylePreviewActionBackgroundBrush" Color="#2563EB" />
+        <SolidColorBrush x:Key="StylePreviewActionForegroundBrush" Color="White" />
+
+        <Style x:Key="PreviewStandardTitleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{StaticResource StylePreviewNeutralForegroundBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="PreviewAccentTitleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource StylePreviewAccentForegroundBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="PreviewCompactTitleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{StaticResource StylePreviewNeutralForegroundBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="PreviewStandardButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="112" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+
+        <Style x:Key="PreviewAccentButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="128" />
+            <Setter Property="Padding" Value="18,8" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="{StaticResource StylePreviewActionBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource StylePreviewActionForegroundBrush}" />
+        </Style>
+
+        <Style x:Key="PreviewCompactButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="88" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </Page.Resources>
+
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="スタイリング" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="ThemeResource、Style、テンプレートなどを整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="スタイリング" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="Style を切り替えたときに、余白、文字サイズ、色、角丸、枠線が UI にどう反映されるかを直接確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="スタイルを直接切り替える" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="20" RowSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="12">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="スタイルプリセット" FontWeight="SemiBold" />
+                            <ComboBox
+                                x:Name="StylePresetComboBox"
+                                MinWidth="220"
+                                SelectionChanged="StylePresetComboBox_SelectionChanged">
+                                <ComboBoxItem Content="標準" Tag="Standard" />
+                                <ComboBoxItem Content="強調" Tag="Accent" />
+                                <ComboBoxItem Content="コンパクト" Tag="Compact" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="カードの角丸" FontWeight="SemiBold" />
+                            <Slider
+                                x:Name="CornerRadiusSlider"
+                                Minimum="0"
+                                Maximum="24"
+                                StepFrequency="1"
+                                ValueChanged="CornerRadiusSlider_ValueChanged" />
+                        </StackPanel>
+
+                        <ToggleSwitch
+                            x:Name="BorderToggleSwitch"
+                            Header="カードの枠線"
+                            Toggled="BorderToggleSwitch_Toggled" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="10">
+                        <Border
+                            x:Name="StylePreviewCard"
+                            Padding="18"
+                            CornerRadius="8"
+                            Background="{StaticResource StylePreviewNeutralBackgroundBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1">
+                            <StackPanel Spacing="12">
+                                <TextBlock
+                                    x:Name="StylePreviewTitleTextBlock"
+                                    Text="プレビューカード"
+                                    Style="{StaticResource PreviewStandardTitleTextBlockStyle}" />
+                                <TextBlock
+                                    x:Name="StylePreviewBodyTextBlock"
+                                    Text="プリセットを変えると、この見出し、本文、ボタン、カード余白のスタイルが同時に変わります。"
+                                    TextWrapping="Wrap" />
+                                <Button
+                                    x:Name="StylePreviewButton"
+                                    Content="操作する"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource PreviewStandardButtonStyle}" />
+                            </StackPanel>
+                        </Border>
+                        <TextBlock
+                            x:Name="StyleResultTextBlock"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="リソースの使い分け" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="190" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ResourceDictionary" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="アプリ全体で共有する色、余白、Style をまとめます。このサンプルでは App.xaml にガイドページ共通のスタイルを置いています。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="StaticResource" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="起動後に値が変わらない前提のリソース参照に使います。独自スタイルや固定的なレイアウト値に向いています。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="ThemeResource" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="ライトテーマ、ダークテーマ、ハイコントラストなどテーマ変化に追従したい色や標準スタイルに使います。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="共通スタイルの例" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="複数ページで同じ余白やカード表現を使う場合、各 Page に同じ値を直接書くより、App.xaml の Style にまとめると変更箇所を減らせます。"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Style=&quot;{StaticResource GuideCardBorderStyle}&quot;&#x0a;Style=&quot;{StaticResource GuideSectionHeadingTextBlockStyle}&quot;"
+                        Style="{StaticResource GuideCodeTextBlockStyle}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WinUI 標準スタイルを活用する" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock
+                    Text="TitleTextBlockStyle などの標準スタイルや、CardBackgroundFillColorDefaultBrush などのテーマブラシを使うと、Windows のテーマに合わせた見た目を保ちやすくなります。固定色を増やす前に、ThemeResource で表現できないかを確認します。"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="WPF と同じように ResourceDictionary で見た目を共有できますが、WinUI 3 ではテーマリソースを前提にした標準コントロールの見た目を優先すると、ライト／ダークテーマで破綻しにくくなります。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

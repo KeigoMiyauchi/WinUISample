@@ -8,10 +8,77 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="アプリ構造" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="WinUI 3 アプリの起動、Window、Page、リソースの関係を整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="アプリ構造" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="WinUI 3 の App、Window、Frame、Page の役割を、WPF の App.xaml や Window と対応づけて確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="起動からページ表示までの流れ" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="App.OnLaunched" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="アプリの入口です。MainWindow を作成し、Activate で表示します。WPF の StartupUri に近い役割ですが、WinUI 3 ではコードで Window を生成します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="MainWindow" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="アプリのシェルです。このサンプルでは NavigationView と Frame を持ち、画面全体の骨格を担当します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Frame" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Page を差し替える表示領域です。NavigationView の選択結果に応じて Frame.Navigate でページを読み込みます。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Page" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="章ごとの UI と説明を持つ画面単位です。Window とは分けて作ることで、ナビゲーションしやすい構成になります。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="このサンプルでの構成" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="App.xaml.cs が MainWindow を起動し、MainWindow.xaml の NavigationView が章一覧を表示します。選択された章は MainWindow.xaml.cs の NavigateToPage で Page 型に変換され、ContentFrame に表示されます。"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="new MainWindow()&#x0a;_window.Activate()&#x0a;ContentFrame.Navigate(typeof(AppStructurePage))"
+                        Style="{StaticResource GuideCodeTextBlockStyle}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WPF との主な違い" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="起動時の画面指定" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="WPF では StartupUri で Window を指定する構成が一般的です。WinUI 3 では OnLaunched で Window を明示的に作成します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Window と Page の分担" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Window はアプリの外枠、Page は差し替え可能な本文として考えると、WPF の Window 直配置より役割を分けやすくなります。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="リソースの配置" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="App.xaml にはテーマや共通スタイルを置き、Page 側では必要な UI と説明に集中します。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

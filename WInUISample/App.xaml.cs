@@ -1,36 +1,19 @@
 ﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace WinUISample
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// アプリ全体の起動処理と共通動作を管理します。
     /// </summary>
     public partial class App : Application
     {
-        private Window? _window;
+        /// <summary>
+        /// 現在表示しているメインウィンドウです。
+        /// </summary>
+        public static Window? MainWindow { get; private set; }
 
         /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// アプリケーションのシングルトンインスタンスを初期化します。
         /// </summary>
         public App()
         {
@@ -38,13 +21,13 @@ namespace WinUISample
         }
 
         /// <summary>
-        /// Invoked when the application is launched.
+        /// アプリ起動時にメインウィンドウを作成して表示します。
         /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
+        /// <param name="args">起動要求の情報です。</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
-            _window.Activate();
+            MainWindow = new MainWindow();
+            MainWindow.Activate();
         }
     }
 }

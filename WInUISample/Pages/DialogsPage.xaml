@@ -8,10 +8,63 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="ダイアログ" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="ContentDialog など、WinUI 3 のダイアログ表示を整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="ダイアログ" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="WPF の MessageBox から WinUI 3 の ContentDialog へ置き換えるときの考え方と実装手順を確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="ContentDialog の基本" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Title / Content" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="タイトルと本文を設定します。本文には文字列だけでなく、StackPanel などの UI も配置できます。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="ButtonText" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Primary、Secondary、Close の各ボタンを必要に応じて設定します。戻り値は ContentDialogResult で確認できます。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="XamlRoot" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="WinUI 3 では、どの XAML ツリー上に表示するかを示すため、表示前に現在ページの XamlRoot を設定します。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="表示サンプル" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="ボタンを押すと、このページの XamlRoot を使って ContentDialog を表示します。選択した結果は下に表示されます。"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Content="ContentDialog を表示"
+                        Click="ShowDialogButton_Click" />
+                    <TextBlock
+                        x:Name="DialogResultTextBlock"
+                        Text="まだダイアログは表示していません。"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WPF MessageBox との違い" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock
+                    Text="WPF の MessageBox.Show は同期的な確認に向いています。WinUI 3 の ContentDialog は非同期で表示し、アプリの XAML ツリーに紐づけて扱います。複雑な内容を表示したい場合は、Content に任意の UI を置ける点も大きな違いです。"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="var result = await dialog.ShowAsync();"
+                    Style="{StaticResource GuideCodeTextBlockStyle}" />
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

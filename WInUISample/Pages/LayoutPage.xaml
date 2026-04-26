@@ -8,10 +8,190 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="レイアウト" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="Grid、StackPanel、レスポンシブな配置などを整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="レイアウト" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="Grid の行列、余白、配置を変えたときに、画面上の要素がどう移動するかを直接確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="レイアウトを直接切り替える" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="20" RowSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="12">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="配置パターン" FontWeight="SemiBold" />
+                            <ComboBox
+                                x:Name="LayoutModeComboBox"
+                                MinWidth="220"
+                                SelectionChanged="LayoutModeComboBox_SelectionChanged">
+                                <ComboBoxItem Content="横並び" Tag="Columns" />
+                                <ComboBoxItem Content="縦積み" Tag="Rows" />
+                                <ComboBoxItem Content="主従レイアウト" Tag="MasterDetail" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="要素間の余白" FontWeight="SemiBold" />
+                            <Slider
+                                x:Name="ItemSpacingSlider"
+                                Minimum="0"
+                                Maximum="32"
+                                StepFrequency="2"
+                                ValueChanged="ItemSpacingSlider_ValueChanged" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="要素の横方向配置" FontWeight="SemiBold" />
+                            <ComboBox
+                                x:Name="ItemAlignmentComboBox"
+                                MinWidth="220"
+                                SelectionChanged="ItemAlignmentComboBox_SelectionChanged">
+                                <ComboBoxItem Content="左寄せ" Tag="Left" />
+                                <ComboBoxItem Content="中央寄せ" Tag="Center" />
+                                <ComboBoxItem Content="幅いっぱい" Tag="Stretch" />
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="10">
+                        <Grid
+                            x:Name="LayoutPreviewGrid"
+                            MinHeight="220"
+                            ColumnSpacing="16"
+                            RowSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                x:Name="LayoutItemOne"
+                                Grid.Column="0"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="一覧" FontWeight="SemiBold" />
+                                    <TextBlock Text="1 つ目の領域" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                x:Name="LayoutItemTwo"
+                                Grid.Column="1"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="詳細" FontWeight="SemiBold" />
+                                    <TextBlock Text="選択内容を表示" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                x:Name="LayoutItemThree"
+                                Grid.Column="2"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="操作" FontWeight="SemiBold" />
+                                    <TextBlock Text="ボタンや補足情報" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <TextBlock
+                            x:Name="LayoutResultTextBlock"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="Grid と StackPanel の使い分け" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Style="{StaticResource GuideCardBorderStyle}">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Grid" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                            <TextBlock Text="行と列で画面を分割し、ラベルと入力欄のように位置をそろえたい場面に向いています。" TextWrapping="Wrap" />
+                            <Grid ColumnSpacing="8" RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="名前" FontWeight="SemiBold" />
+                                <TextBox Grid.Row="0" Grid.Column="1" PlaceholderText="山田 太郎" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="役割" FontWeight="SemiBold" />
+                                <TextBox Grid.Row="1" Grid.Column="1" PlaceholderText="開発者" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource GuideCardBorderStyle}">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="StackPanel" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                            <TextBlock Text="見出し、説明、操作ボタンを順に積むような読み物ページに向いています。" TextWrapping="Wrap" />
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="手順 1: 章を選ぶ" />
+                                <TextBlock Text="手順 2: 説明を読む" />
+                                <TextBlock Text="手順 3: サンプルを試す" />
+                                <Button Content="サンプル操作" HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="余白と配置" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Margin" FontWeight="SemiBold" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="要素の外側の余白です。周囲の要素との距離を調整します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Padding" FontWeight="SemiBold" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="要素の内側の余白です。Border やコンテナー内の読みやすさを調整します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Alignment" FontWeight="SemiBold" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="HorizontalAlignment と VerticalAlignment で、親領域内の位置を決めます。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="スクロール領域を明示する" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="WinUI 3 でも WPF と同じく Grid や StackPanel は使えます。ただしウィンドウサイズや説明文の長さが変わるガイドページでは、Page の本文を ScrollViewer で包み、内容がはみ出しても読めるようにします。"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>

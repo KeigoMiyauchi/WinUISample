@@ -8,10 +8,56 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Spacing="12" Padding="32">
-            <TextBlock Text="ナビゲーション" Style="{ThemeResource TitleTextBlockStyle}" />
-            <TextBlock Text="NavigationView と Frame を使った画面遷移を整理する章です。" TextWrapping="Wrap" />
-            <TextBlock Text="この章の詳細なガイドは今後の Issue で実装します。" TextWrapping="Wrap" />
+        <StackPanel Style="{StaticResource GuideContentStackPanelStyle}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="ナビゲーション" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="NavigationView で章を選び、Frame に Page を表示する WinUI 3 の基本パターンを確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="このアプリの遷移パターン" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="16" RowSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="NavigationViewItem" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="メニューに表示する章です。Content が画面上の文字、Tag が遷移先を識別するキーになります。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="SelectionChanged" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="ユーザーが章を選ぶとイベントが発生し、選択された NavigationViewItem を NavigateToPage に渡します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Frame.Navigate" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Tag に対応する Page 型を ContentFrame に表示します。同じページを選んだ場合は再遷移しないように現在の Page 型を確認します。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="MainWindow の対応関係" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock
+                        Text="NavigationViewItem.Tag = &quot;Dialogs&quot;&#x0a;Tag の値を typeof(DialogsPage) に変換&#x0a;ContentFrame.Navigate(typeof(DialogsPage))"
+                        Style="{StaticResource GuideCodeTextBlockStyle}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WPF から移るときの考え方" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock
+                    Text="WPF では Button や MenuItem の Click イベントから個別に Frame.Navigate を呼ぶ構成もよく使われます。WinUI 3 では NavigationView をアプリのシェルに置き、選択処理を 1 か所に集約すると、メニューの追加やページ差し替えが追いやすくなります。"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="このサンプルも MainWindow がナビゲーションを管理し、各 Page は本文とサンプル操作だけを担当する構成にしています。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>
