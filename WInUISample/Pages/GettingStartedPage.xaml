@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUISample.Pages.GettingStartedPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="960"
+            Padding="32"
+            HorizontalAlignment="Left"
+            Spacing="24">
+            <StackPanel Spacing="8">
+                <TextBlock Text="WPF 経験者向け WinUI 3 初回ガイド" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock
+                    Text="WPF の App、Window、Page、Frame の知識を出発点に、WinUI 3 アプリの入口と画面遷移の関係を確認します。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="WPF と WinUI 3 の対応関係" FontSize="22" FontWeight="SemiBold" />
+                <Grid ColumnSpacing="16" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="220" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="WPF" FontWeight="SemiBold" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="WinUI 3" FontWeight="SemiBold" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="役割" FontWeight="SemiBold" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="App.xaml / App.xaml.cs" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="App.xaml / App.xaml.cs" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="アプリ起動時の共通リソースと、最初に開く Window を準備します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Window" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Window" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="デスクトップアプリの最上位ウィンドウです。WinUI 3 では MainWindow が NavigationView と Frame を保持します。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Page" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Page" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="画面単位の UI です。章ごとの説明やサンプルを Page として分けます。" TextWrapping="Wrap" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Frame" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="Frame" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="Page を差し替える表示領域です。NavigationView の選択に応じて Frame.Navigate で遷移します。" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="NavigationView が担う役割" FontSize="22" FontWeight="SemiBold" />
+                <TextBlock
+                    Text="このサンプルでは MainWindow がアプリシェルです。左側の NavigationView が章の一覧を表示し、中央の Frame に選択された Page を表示します。WPF のメニューやナビゲーション領域を、WinUI 3 の標準的なシェル構成に置き換えた形です。"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="MessageBox から ContentDialog へ" FontSize="22" FontWeight="SemiBold" />
+                <TextBlock
+                    Text="WPF では MessageBox.Show で簡単な確認ダイアログを表示できます。WinUI 3 では ContentDialog を作成し、表示先の XamlRoot を設定してから非同期で表示します。"
+                    TextWrapping="Wrap" />
+                <Button
+                    Content="ContentDialog を表示"
+                    Click="ShowContentDialogButton_Click" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
