@@ -7,7 +7,10 @@ namespace WinUISample
     /// </summary>
     public partial class App : Application
     {
-        private Window? _window;
+        /// <summary>
+        /// 現在表示しているメインウィンドウです。
+        /// </summary>
+        public static Window? MainWindow { get; private set; }
 
         /// <summary>
         /// アプリケーションのシングルトンインスタンスを初期化します。
@@ -23,8 +26,8 @@ namespace WinUISample
         /// <param name="args">起動要求の情報です。</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
-            _window.Activate();
+            MainWindow = new MainWindow();
+            MainWindow.Activate();
         }
     }
 }

@@ -16,8 +16,75 @@
                     TextWrapping="Wrap" />
             </StackPanel>
 
+            <Border Style="{StaticResource GuideCardBorderStyle}">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="外観を直接変更する" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                        <TextBlock
+                            Text="下の設定を変えると、現在表示しているアプリのテーマ、背景素材、ウィンドウタイトルへそのまま反映されます。"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Grid ColumnSpacing="16" RowSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="テーマ" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <ComboBox
+                            x:Name="ThemeComboBox"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MinWidth="220"
+                            HorizontalAlignment="Left"
+                            SelectionChanged="ThemeComboBox_SelectionChanged">
+                            <ComboBoxItem Content="システム設定に従う" Tag="Default" />
+                            <ComboBoxItem Content="ライト" Tag="Light" />
+                            <ComboBoxItem Content="ダーク" Tag="Dark" />
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="背景素材" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <ComboBox
+                            x:Name="BackdropComboBox"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            MinWidth="220"
+                            HorizontalAlignment="Left"
+                            SelectionChanged="BackdropComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Mica" Tag="Mica" />
+                            <ComboBoxItem Content="Acrylic" Tag="Acrylic" />
+                            <ComboBoxItem Content="なし" Tag="None" />
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="タイトル" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <StackPanel Grid.Row="2" Grid.Column="1" Spacing="8">
+                            <TextBox
+                                x:Name="WindowTitleTextBox"
+                                Width="260"
+                                MaxWidth="320"
+                                HorizontalAlignment="Left"
+                                PlaceholderText="ウィンドウタイトル" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Button Content="適用" Click="ApplyTitleButton_Click" />
+                                <Button Content="初期値に戻す" Click="ResetAppearanceButton_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock
+                        x:Name="AppearanceResultTextBlock"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
             <StackPanel Spacing="12">
-                <TextBlock Text="外観を決める主な場所" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <TextBlock Text="このページで変更している場所" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
                 <Grid ColumnSpacing="16" RowSpacing="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="190" />
@@ -31,24 +98,24 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="MicaBackdrop" FontWeight="SemiBold" TextWrapping="Wrap" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Window.SystemBackdrop に設定する背景素材です。このサンプルでは MainWindow.xaml で MicaBackdrop を使っています。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Window.SystemBackdrop に設定する背景素材です。このページでは Mica、Acrylic、なしを切り替えます。" TextWrapping="Wrap" />
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="タイトルバー" FontWeight="SemiBold" TextWrapping="Wrap" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Window の Title や AppWindow 関連 API で調整します。独自タイトルバーを作る場合はドラッグ領域やボタン領域も考慮します。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Window.Title に設定した文字列が OS のタイトルバーやタスク一覧に表示されます。" TextWrapping="Wrap" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="アプリアイコン" FontWeight="SemiBold" TextWrapping="Wrap" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="Package.appxmanifest の VisualElements と Assets フォルダーの画像が、スタートメニューやタスクバーで使われます。" TextWrapping="Wrap" />
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="表示名" FontWeight="SemiBold" TextWrapping="Wrap" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Package.appxmanifest の DisplayName が、インストール後のアプリ名として表示されます。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Package.appxmanifest の DisplayName が、インストール後のスタートメニューなどで表示されるアプリ名になります。" TextWrapping="Wrap" />
                 </Grid>
             </StackPanel>
 
             <Border Style="{StaticResource GuideCardBorderStyle}">
                 <StackPanel Spacing="10">
-                    <TextBlock Text="このサンプルで確認できる設定" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
+                    <TextBlock Text="実装で使っている API" Style="{StaticResource GuideSubHeadingTextBlockStyle}" />
                     <TextBlock
-                        Text="MainWindow.xaml: Window.SystemBackdrop に MicaBackdrop を指定&#x0a;Package.appxmanifest: DisplayName と VisualElements を指定&#x0a;Assets: ロゴやスプラッシュスクリーン画像を配置"
+                        Text="App.MainWindow.SystemBackdrop = new MicaBackdrop()&#x0a;App.MainWindow.SystemBackdrop = new DesktopAcrylicBackdrop()&#x0a;rootElement.RequestedTheme = ElementTheme.Dark&#x0a;App.MainWindow.Title = &quot;WinUI 3 ガイド&quot;"
                         Style="{StaticResource GuideCodeTextBlockStyle}" />
                 </StackPanel>
             </Border>
@@ -59,7 +126,7 @@
                     Text="WPF では WindowStyle、AllowsTransparency、独自 Chrome などでウィンドウ外観を大きく作り込むことができます。WinUI 3 では Windows App SDK のウィンドウ API、標準背景素材、manifest の表示名やロゴ資産を組み合わせて整えます。"
                     TextWrapping="Wrap" />
                 <TextBlock
-                    Text="この Issue では外観設定を直接変更するのではなく、どこを変更すればよいかをガイドページ上で分かる状態にしています。"
+                    Text="このページではテーマや背景素材の変更を現在の Window に直接反映し、manifest で決まる表示名やアイコンとは変更タイミングが違うことも分かるようにしています。"
                     TextWrapping="Wrap" />
             </StackPanel>
         </StackPanel>
