@@ -1,18 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using WinUISample.Pages;
 
 namespace WinUISample
 {
@@ -25,26 +14,47 @@ namespace WinUISample
         public MainWindow()
         {
             InitializeComponent();
+            GuideNavigationView.SelectedItem = AppStructureNavigationItem;
+            NavigateToPage(AppStructureNavigationItem);
         }
         #endregion
 
-        #region HelloButton_Click : HelloButton のクリックイベントハンドラー
+        #region GuideNavigationView_SelectionChanged : 章選択時のイベントハンドラー
         /// <summary>
-        /// HelloButton のクリックイベントハンドラー
+        /// 章選択時のイベントハンドラー
         /// </summary>
-        private async void HelloButton_Click(object sender, RoutedEventArgs e)
+        private void GuideNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            // WinUI では、MessageBox は存在しないため、ContentDialog を使用してメッセージを表示します。
-            var dialog = new ContentDialog()
+            if (args.SelectedItem is NavigationViewItem selectedItem)
             {
-                Title = "Hello, WinUI!",
-                Content = "This is a message from the button click event.",
-                PrimaryButtonText = "Yes",
-                SecondaryButtonText = "No",
-                CloseButtonText = "Cancel",
-                XamlRoot = Content.XamlRoot,
+                NavigateToPage(selectedItem);
+            }
+        }
+        #endregion
+
+        #region NavigateToPage : 選択された章へ遷移
+        /// <summary>
+        /// 選択された章へ遷移します。
+        /// </summary>
+        private void NavigateToPage(NavigationViewItem selectedItem)
+        {
+            var pageType = selectedItem.Tag switch
+            {
+                "AppStructure" => typeof(AppStructurePage),
+                "Navigation" => typeof(NavigationPage),
+                "Dialogs" => typeof(DialogsPage),
+                "Layout" => typeof(LayoutPage),
+                "Styling" => typeof(StylingPage),
+                "AppAppearance" => typeof(AppAppearancePage),
+                _ => typeof(AppStructurePage),
             };
-            _ = dialog.ShowAsync();
+
+            GuideNavigationView.Header = selectedItem.Content;
+
+            if (ContentFrame.CurrentSourcePageType != pageType)
+            {
+                ContentFrame.Navigate(pageType);
+            }
         }
         #endregion
     }
