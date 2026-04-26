@@ -44,6 +44,7 @@ namespace WinUISample
                 "Navigation" => typeof(NavigationPage),
                 "Dialogs" => typeof(DialogsPage),
                 "Layout" => typeof(LayoutPage),
+                "ItemsControls" => typeof(ItemsControlsPage),
                 "Styling" => typeof(StylingPage),
                 "AppAppearance" => typeof(AppAppearancePage),
                 _ => typeof(GettingStartedPage),
