@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "WinUISample デバッグ",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "WinUISample",
+            "preLaunchTask": "MSIXパッケージを登録して起動",
+            "justMyCode": true
+        }
+    ]
+}
