@@ -16,7 +16,7 @@
   <mp:PhoneIdentity PhoneProductId="30fb9632-0ca3-4b46-b553-f1c909f0766e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>WInUISample</DisplayName>
+    <DisplayName>WinUISample</DisplayName>
     <PublisherDisplayName>keigo</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -35,8 +35,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="WInUISample"
-        Description="WInUISample"
+        DisplayName="WinUISample"
+        Description="WinUISample"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-namespace WInUISample
+namespace WinUISample
 {
     public sealed partial class MainWindow : Window
     {
