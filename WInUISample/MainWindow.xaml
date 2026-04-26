@@ -43,6 +43,10 @@
                 Icon="ViewAll"
                 Tag="Layout" />
             <NavigationViewItem
+                Content="ItemsControls"
+                Icon="List"
+                Tag="ItemsControls" />
+            <NavigationViewItem
                 Content="スタイリング"
                 Icon="Edit"
                 Tag="Styling" />
