@@ -176,6 +176,9 @@ publish/
 
 # Publish Web Output
 *.[Pp]ubxml
+# このアプリの MSIX 発行プロファイルはプロジェクト設定として管理する
+!WInUISample/Properties/PublishProfiles/
+!WInUISample/Properties/PublishProfiles/*.pubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml.user
