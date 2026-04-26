@@ -21,6 +21,11 @@
         SelectionChanged="GuideNavigationView_SelectionChanged">
         <NavigationView.MenuItems>
             <NavigationViewItem
+                x:Name="GettingStartedNavigationItem"
+                Content="はじめに"
+                Icon="Home"
+                Tag="GettingStarted" />
+            <NavigationViewItem
                 x:Name="AppStructureNavigationItem"
                 Content="アプリ構造"
                 Icon="Home"

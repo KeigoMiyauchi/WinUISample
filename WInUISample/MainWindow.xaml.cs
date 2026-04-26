@@ -14,8 +14,8 @@ namespace WinUISample
         public MainWindow()
         {
             InitializeComponent();
-            GuideNavigationView.SelectedItem = AppStructureNavigationItem;
-            NavigateToPage(AppStructureNavigationItem);
+            GuideNavigationView.SelectedItem = GettingStartedNavigationItem;
+            NavigateToPage(GettingStartedNavigationItem);
         }
         #endregion
 
@@ -40,13 +40,14 @@ namespace WinUISample
         {
             var pageType = selectedItem.Tag switch
             {
+                "GettingStarted" => typeof(GettingStartedPage),
                 "AppStructure" => typeof(AppStructurePage),
                 "Navigation" => typeof(NavigationPage),
                 "Dialogs" => typeof(DialogsPage),
                 "Layout" => typeof(LayoutPage),
                 "Styling" => typeof(StylingPage),
                 "AppAppearance" => typeof(AppAppearancePage),
-                _ => typeof(AppStructurePage),
+                _ => typeof(GettingStartedPage),
             };
 
             GuideNavigationView.Header = selectedItem.Content;
