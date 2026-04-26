@@ -12,8 +12,108 @@
             <StackPanel Spacing="8">
                 <TextBlock Text="レイアウト" Style="{ThemeResource TitleTextBlockStyle}" />
                 <TextBlock
-                    Text="Grid、StackPanel、余白、配置、スクロール領域を、WPF との共通点と WinUI 3 での注意点に分けて確認します。"
+                    Text="Grid の行列、余白、配置を変えたときに、画面上の要素がどう移動するかを直接確認します。"
                     TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="レイアウトを直接切り替える" Style="{StaticResource GuideSectionHeadingTextBlockStyle}" />
+                <Grid ColumnSpacing="20" RowSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="12">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="配置パターン" FontWeight="SemiBold" />
+                            <ComboBox
+                                x:Name="LayoutModeComboBox"
+                                MinWidth="220"
+                                SelectionChanged="LayoutModeComboBox_SelectionChanged">
+                                <ComboBoxItem Content="横並び" Tag="Columns" />
+                                <ComboBoxItem Content="縦積み" Tag="Rows" />
+                                <ComboBoxItem Content="主従レイアウト" Tag="MasterDetail" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="要素間の余白" FontWeight="SemiBold" />
+                            <Slider
+                                x:Name="ItemSpacingSlider"
+                                Minimum="0"
+                                Maximum="32"
+                                StepFrequency="2"
+                                ValueChanged="ItemSpacingSlider_ValueChanged" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="要素の横方向配置" FontWeight="SemiBold" />
+                            <ComboBox
+                                x:Name="ItemAlignmentComboBox"
+                                MinWidth="220"
+                                SelectionChanged="ItemAlignmentComboBox_SelectionChanged">
+                                <ComboBoxItem Content="左寄せ" Tag="Left" />
+                                <ComboBoxItem Content="中央寄せ" Tag="Center" />
+                                <ComboBoxItem Content="幅いっぱい" Tag="Stretch" />
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="10">
+                        <Grid
+                            x:Name="LayoutPreviewGrid"
+                            MinHeight="220"
+                            ColumnSpacing="16"
+                            RowSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                x:Name="LayoutItemOne"
+                                Grid.Column="0"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="一覧" FontWeight="SemiBold" />
+                                    <TextBlock Text="1 つ目の領域" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                x:Name="LayoutItemTwo"
+                                Grid.Column="1"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="詳細" FontWeight="SemiBold" />
+                                    <TextBlock Text="選択内容を表示" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                x:Name="LayoutItemThree"
+                                Grid.Column="2"
+                                MinHeight="88"
+                                Style="{StaticResource GuideCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="操作" FontWeight="SemiBold" />
+                                    <TextBlock Text="ボタンや補足情報" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <TextBlock
+                            x:Name="LayoutResultTextBlock"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
             </StackPanel>
 
             <StackPanel Spacing="12">
